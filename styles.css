@@ -1,0 +1,648 @@
+/* ── スタック・スカイ 紹介ページの配色 ─────────────────────────────
+   iOS アプリのライトモード・テーマ「空」（stacksky/Rendering/Theme.swift の nightLight）をそのまま反映。
+   bg #E6F0FD   bar #F3F7FE   surface #FFFFFF   surface2 #E1E9F6   line #D2DCEC
+   fg #1C2350   muted #646E98   accent #2F8CEB   accentPress #1F64AE
+   sun #FFC93C（文字には濃い #B0700A）   mint #45E0B4（文字には濃い #10906C）
+   （pocorin の紹介ページ、もとはパズルちゃんの tsudatech/puzzle_chan_web の構成を踏襲。
+     カードはアプリの記録・設定の画面と同じく、白地に細い枠線。主ボタンはアプリの「はじめる」と同じ、下に影のある青）
+
+   文字は M PLUS Rounded 1c（アプリの HTML 版と同じ）を Google Fonts から読む。
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", "Nunito", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.85;
+  color: #1c2350;
+  background-color: #e6f0fd;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background-color: rgba(243, 247, 254, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 #d2dcec;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(28, 35, 80, 0.12);
+}
+
+.nav-logo h1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1c2350;
+  letter-spacing: 0.01em;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-menu a {
+  color: #646e98;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+  color: #2f8ceb;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: #9aa3c4;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 2px;
+  transition: color 0.2s ease;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+  color: #2f8ceb;
+}
+
+.lang-separator {
+  color: #c6d3ea;
+  font-size: 0.85rem;
+}
+
+/* Hero：ライトモードのホームと同じ、昼の空 */
+.hero {
+  padding: 140px 0 90px;
+  background:
+    radial-gradient(760px 380px at 85% 8%, #fff6d8 0%, rgba(255, 246, 216, 0) 60%),
+    linear-gradient(#a9d3f4 0%, #d6e9fb 55%, #f6ebd6 100%);
+}
+
+.hero-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* アプリのタイトル（アプリのホームと同じく、2行目をアクセントの色に） */
+.hero-logo {
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  color: #1c2350;
+  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.8);
+  margin-bottom: 18px;
+}
+
+.hero-logo span {
+  display: inline-block;
+  /* 英語の「 Sky」の頭の空白を残す（行内のまとまりの先頭の空白は、ふつうは消える） */
+  white-space: pre;
+}
+
+.hero-logo-accent {
+  color: #2f8ceb;
+}
+
+.hero-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+
+/* 語の途中で折り返らないよう、行のまとまりごとに改行させる */
+.hero-title span {
+  display: inline-block;
+}
+
+.hero-title-accent {
+  color: #2f8ceb;
+}
+
+.hero-description {
+  font-size: 1.02rem;
+  color: #3e4775;
+  margin-bottom: 32px;
+  max-width: 34em;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ボタン：主ボタンはアプリの「はじめる」と同じく、下に濃い青の影 */
+.btn {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+}
+
+.btn-primary {
+  background: #2f8ceb;
+  color: #fff;
+  box-shadow: 0 4px 0 #1f64ae;
+}
+
+.btn-primary:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1f64ae;
+}
+
+.btn-outline {
+  background: #fff;
+  color: #1c2350;
+  box-shadow: inset 0 0 0 1px #d2dcec, 0 4px 0 #e1e9f6;
+}
+
+.btn-outline:hover {
+  transform: translateY(2px);
+  box-shadow: inset 0 0 0 1px #d2dcec, 0 2px 0 #e1e9f6;
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+/* 塔の絵（ヘッダ画像の中央）の上に、アイコンを重ねる */
+.hero-art {
+  position: relative;
+  width: min(440px, 100%);
+}
+
+.hero-art-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px rgba(28, 35, 80, 0.16);
+}
+
+.app-icon-placeholder {
+  position: absolute;
+  left: -22px;
+  bottom: -22px;
+  width: 132px;
+  height: 132px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(28, 35, 80, 0.2);
+  transform: rotate(-5deg);
+}
+
+.app-icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sections */
+.section-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.section-lead {
+  text-align: center;
+  color: #646e98;
+  font-size: 0.96rem;
+  max-width: 46em;
+  margin: 0 auto 40px;
+  text-wrap: balance;
+}
+
+/* 見出しだけの節は、見出しの下に余白を足して本体と離す */
+.features .section-title,
+.download .section-title,
+.privacy .section-title,
+.contact .section-title {
+  margin-bottom: 48px;
+}
+
+/* カードの共通の見た目（アプリの記録・設定の画面と同じく、白地に細い枠線） */
+.mode-card,
+.feature-card,
+.download-info,
+.download-requirements,
+.privacy-content,
+.contact-method {
+  background: #fff;
+  border: 1px solid #d2dcec;
+  border-radius: 20px;
+}
+
+/* Modes */
+.modes {
+  padding: 88px 0;
+  background-color: #f3f7fe;
+}
+
+.modes-grid {
+  display: grid;
+  /* 4つのモードは、PC では2列×2段（スマホでは1列） */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 18px;
+}
+
+.mode-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px 22px;
+  transition: transform 0.2s ease;
+}
+
+/* モードのアイコン（立方体）と同じ色の系統で、うっすら色分け */
+.mode-normal { background: #eef5fe; }
+.mode-zen { background: #ecfaf5; }
+.mode-deep { background: #e8f5fa; }
+.mode-cpu { background: #fdeef1; }
+
+.mode-card:hover {
+  transform: translateY(-3px);
+}
+
+.mode-mark {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  display: block;
+}
+
+.mode-body h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.mode-body p {
+  font-size: 0.9rem;
+  color: #3e4775;
+  line-height: 1.8;
+}
+
+/* Features */
+.features {
+  padding: 88px 0;
+  background-color: #e6f0fd;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 26px 24px;
+  transition: transform 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+}
+
+.feature-icon {
+  margin-bottom: 14px;
+}
+
+.icon-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: #e1e9f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.feature-card h3 {
+  font-size: 1.04rem;
+  font-weight: 800;
+  color: #1f64ae;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 0.92rem;
+  color: #3e4775;
+  line-height: 1.85;
+}
+
+/* Download */
+.download {
+  padding: 88px 0;
+  background-color: #f3f7fe;
+}
+
+.download-content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.download-info,
+.download-requirements {
+  padding: 30px 28px;
+}
+
+.download-info h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.download-info p {
+  color: #646e98;
+  font-size: 0.94rem;
+  margin-bottom: 22px;
+}
+
+.app-store-placeholder {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: 16px;
+  background: #2f8ceb;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 0 #1f64ae;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.app-store-placeholder:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1f64ae;
+}
+
+.download-requirements h4 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.download-requirements ul {
+  list-style: none;
+}
+
+.download-requirements li {
+  color: #3e4775;
+  font-size: 0.92rem;
+  padding: 7px 0 7px 20px;
+  position: relative;
+  border-bottom: 1px solid #e1e9f6;
+}
+
+.download-requirements li:last-child {
+  border-bottom: none;
+}
+
+.download-requirements li::before {
+  content: "・";
+  position: absolute;
+  left: 2px;
+  color: #2f8ceb;
+}
+
+/* Privacy */
+.privacy {
+  padding: 88px 0;
+  background-color: #e6f0fd;
+}
+
+.privacy-content {
+  padding: 36px 34px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.privacy-content h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.privacy-content h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin: 26px 0 8px;
+  color: #1f64ae;
+}
+
+.privacy-content p {
+  color: #3e4775;
+  font-size: 0.93rem;
+}
+
+.privacy-content a {
+  color: #2f8ceb;
+}
+
+.privacy-update {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid #e1e9f6;
+  font-size: 0.84rem !important;
+  color: #9aa3c4 !important;
+}
+
+/* Contact */
+.contact {
+  padding: 88px 0;
+  background-color: #f3f7fe;
+}
+
+.contact-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-content > p {
+  color: #646e98;
+  margin-bottom: 36px;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.contact-method {
+  padding: 24px;
+}
+
+.contact-method h3 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.contact-method p,
+.contact-method a {
+  font-size: 0.9rem;
+  color: #3e4775;
+}
+
+.contact-method a {
+  color: #2f8ceb;
+  text-decoration: none;
+}
+
+.contact-method a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  background: #f3f7fe;
+  border-top: 1px solid #d2dcec;
+  padding: 30px 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #9aa3c4;
+  font-size: 0.84rem;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-container,
+  .download-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 120px 0 72px;
+    text-align: center;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    order: -1;
+    margin-bottom: 12px;
+  }
+
+  .hero-art {
+    width: min(360px, 86%);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .app-icon-placeholder {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    left: -12px;
+    bottom: -14px;
+  }
+
+  .privacy-content {
+    padding: 26px 20px;
+  }
+}
